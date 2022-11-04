@@ -1,6 +1,5 @@
-:grinning:  
 
-LW3 sophomore的最后一节：建造一个类似于Uniswap的去中心化交易所
+LW3 sophomore的最后一节：建造一个类似于Uniswap的去中心化交易所:grinning:  
 
 这个repo里包含了Uniswap的原理图，我整合了知乎上的一篇文章（链接在导图里面有）和LW3的教程，做了总结性的思维导图 :wink:
 
