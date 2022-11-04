@@ -1,34 +1,21 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+:grinning:  
 
-## Getting Started
+LW3 sophomore的最后一节：建造一个类似于Uniswap的去中心化交易所
 
-First, run the development server:
+这个repo里包含了Uniswap的原理图，我整合了知乎上的一篇文章（链接在导图里面有）和LW3的教程，做了总结性的思维导图 :wink:
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+总体而言，这个项目和之前的项目不同点在于 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 它封装了调用合约函数的方法，将这些方法放在utils文件夹里面
+- 结合了Uniswap的原理，多了一些基础的数学计算，这些我也制作了手绘图~
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+话不多说 上图:tanabata_tree:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
+![DEX去中心化交易所](https://user-images.githubusercontent.com/95857565/199931656-fab48fc9-da4a-4eed-a0ea-5cdbee6665c0.png)
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![Uniswap](https://user-images.githubusercontent.com/95857565/199931698-02588d9d-1bb7-4a28-bd54-745b9dbe6d49.png)
