@@ -83,7 +83,7 @@ contract Exchange is ERC20 {
         uint256 cryptoDevTokenAmount = (getReserve() * _amount) / _totalSupply;
         // /从用户的钱包中烧掉LP token，因为它们已经被发送到删除流动性
         _burn(msg.sender, _amount);
-        // 将'ethAmount'的eth从合同转移到用户的钱包
+        // todo 将'ethAmount'的eth从合同转移到用户的钱包   这里为什么用payable
         payable(msg.sender).transfer(ethAmount);
         // 将“cryptoDevTokenAmount”数量的Crypto Dev token从合同转移到用户的钱包
         ERC20(cryptoDevTokenAddress).transfer(msg.sender, cryptoDevTokenAmount);

@@ -34,6 +34,7 @@ export const getTokensAfterRemove = async (
     );
     // 得到CD LP Token的总数
     const _totalSupply = await exchangeContract.totalSupply();
+    //用户remove LP Token后，返回给用户的Eth数量
     // 这里我们使用的是乘法和除法的BigNumber方法
     const _removeEther = _ethBalance.mul(removeLPTokensWei).div(_totalSupply);
     const _removeCD = cryptoDevTokenReserve
@@ -43,7 +44,6 @@ export const getTokensAfterRemove = async (
       _removeEther,
       _removeCD,
     };
-    //用户remove LP Token后，返回给用户的Eth数量
   } catch (err) {
     console.error(err);
   }
