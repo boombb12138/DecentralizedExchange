@@ -1,7 +1,13 @@
 import { BigNumber, providers, utils } from "ethers";
 import Head from "next/head";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Web3Modal from "web3modal";
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import TypeIt from "typeit-react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 import styles from "../styles/Home.module.css";
 import { addLiquidity, calculateCD } from "../utils/addLiquidity";
 import {
@@ -263,6 +269,55 @@ export default function Home() {
     }
   }, [walletConnected]);
 
+  // ==================Three.js==================
+  useEffect(() => {
+    const scene = new THREE.Scene();
+    // scene.background = null;
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    );
+
+    const canvas = document.getElementById("webgl");
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    // document.body.appendChild(renderer.domElement); //创建画布canvas
+
+    const controls = new OrbitControls(camera, canvas);
+    controls.update();
+
+    const geometry = new THREE.SphereGeometry(2, 32, 32);
+    // 换球体的材质为宇宙背景的图片
+    const textureLoader = new THREE.TextureLoader();
+    const texture = textureLoader.load("texture.png");
+    const material = new THREE.MeshBasicMaterial({ map: texture });
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+
+    camera.position.z = 5;
+
+    function animate() {
+      cube.rotation.x += 0.01;
+      cube.rotation.y += 0.01;
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    }
+
+    animate();
+  }, []);
+  // ==================Three.js end===================
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      easing: "ease-out-back",
+      delay: 600,
+    });
+  }, []);
+
   // ============================= RENDER FUNCTIONS========================
   const renderButton = () => {
     // 提示连接钱包的按钮
@@ -281,17 +336,18 @@ export default function Home() {
     if (liquidityTab) {
       return (
         <div>
-          <div className={styles.description}>
+          <div>
+            {/* data-aos="fade-up" data-aos-delay="400" data-aos-easing="ease" */}
             You have:
             <br />
             {/* 将BigNumber转为String */}
-            {utils.formatEther(cdBalance)} Crypto Dev Tokens
+            {utils.formatEther(cdBalance).slice(0, 6)} Crypto Dev Tokens
             <br />
-            {utils.formatEther(ethBalance)} Ether
+            {utils.formatEther(ethBalance).slice(0, 6)} Ether
             <br />
-            {utils.formatEther(lpBalance)} Crypto Dev LP tokens
+            {utils.formatEther(lpBalance).slice(0, 6)} Crypto Dev LP tokens
           </div>
-          <div>
+          <div className={styles.wrapper}>
             {/* 如果存储的CD为零，则在询问用户他想要加入多少初始流动性时
                 将流动性状态渲染为零
                 否则渲染这样的状态：流动性不为0
@@ -320,7 +376,7 @@ export default function Home() {
                 </button>
               </div>
             ) : (
-              <div>
+              <div className={styles.wrapperOne}>
                 <input
                   type="number"
                   placeholder="Amount of Ether"
@@ -347,7 +403,7 @@ export default function Home() {
               </div>
             )}
 
-            <div>
+            <div className={styles.wrapperTwo}>
               <input
                 type="number"
                 placeholder="Amount of LP Tokens"
@@ -374,7 +430,7 @@ export default function Home() {
       );
     } else {
       return (
-        <div>
+        <div data-aos="fade-up" data-aos-delay="400" data-aos-easing="ease">
           <input
             type="number"
             placeholder="Amount"
@@ -424,38 +480,44 @@ export default function Home() {
         <meta name="description" content="Whitelist-Dapp" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={styles.main}>
-        <div>
-          <h1 className={styles.title}>Welcome to Crypto Devs Exchange!</h1>
-          <div className={styles.description}>
-            Exchange Ethereum &#60;&#62; Crypto Dev Tokens
-          </div>
-          <div>
-            <button
-              className={styles.button}
-              onClick={() => {
-                setLiquidityTab(true);
-              }}
-            >
-              Liquidity
-            </button>
-            <button
-              className={styles.button}
-              onClick={() => {
-                setLiquidityTab(false);
-              }}
-            >
-              Swap
-            </button>
-          </div>
-        </div>
-        {renderButton()}
-      </div>
-      <div>
-        <img className={styles.image} src="./cryptodev.svg" />
+
+      <canvas className={styles.webgl} id="webgl"></canvas>
+      <div className={styles.typeIt}>
+        <TypeIt className={styles.title}>
+          Welcome to Crypto Devs Exchange!
+        </TypeIt>
       </div>
 
-      <footer className={styles.footer}> Made with &#10084; by Naomi</footer>
+      <div className={styles.pageTwo}>
+        <div className={styles.main}>
+          <div>
+            {/* <h1 className={styles.title}>Welcome to Crypto Devs Exchange!</h1> */}
+            <div className={styles.description}>
+              Exchange Ethereum &#60;&#62; Crypto Dev Tokens
+            </div>
+            <div>
+              <button
+                className={styles.button}
+                onClick={() => {
+                  setLiquidityTab(true);
+                }}
+              >
+                Liquidity
+              </button>
+              <button
+                className={styles.button}
+                onClick={() => {
+                  setLiquidityTab(false);
+                }}
+              >
+                Swap
+              </button>
+            </div>
+          </div>
+          {renderButton()}
+        </div>
+        <div className={styles.footer}> Made with &#10084; by Naomi</div>
+      </div>
     </div>
   );
 }
