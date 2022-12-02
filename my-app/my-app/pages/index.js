@@ -1,9 +1,12 @@
 import { BigNumber, providers, utils } from "ethers";
 import Head from "next/head";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import Web3Modal from "web3modal";
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
+
+import { OrbitControls as OrbitBackground } from "three/examples/jsm/controls/OrbitControls.js";
 import TypeIt from "typeit-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -21,6 +24,13 @@ import {
   removeLiquidity,
 } from "../utils/removeLiquidity";
 import { swapTokens, getAmountOfTokensReceivedFromSwap } from "../utils/swap";
+import {
+  AnimatedSphere,
+  AnimatedSphereBig,
+  AnimatedSphereSmall,
+} from "./components/AnimatedSphere";
+import { Ethcoin } from "./components/Ethcoin";
+import Loading from "./components/Loading/Loading";
 
 export default function Home() {
   // =============================state variables ========================
@@ -285,7 +295,7 @@ export default function Home() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     // document.body.appendChild(renderer.domElement); //创建画布canvas
 
-    const controls = new OrbitControls(camera, canvas);
+    const controls = new OrbitBackground(camera, canvas);
     controls.update();
 
     const geometry = new THREE.SphereGeometry(2, 32, 32);
@@ -330,22 +340,50 @@ export default function Home() {
     }
 
     if (loading) {
-      return <button className={styles.button}>loading</button>;
+      // return <button className={styles.button}>loading</button>;
+      return <Loading />;
     }
 
     if (liquidityTab) {
       return (
         <div>
-          <div>
+          <Canvas className={styles.assetsPurple}>
+            <OrbitControls enableZoom={false}></OrbitControls>
+            <ambientLight intensity={0.5} />
+            <directionalLight position={[-2, 5, 2]} intensity={1} />
+            <Suspense fallback={null}>
+              <AnimatedSphere></AnimatedSphere>
+            </Suspense>
+          </Canvas>
+          <Canvas className={styles.assetsPurpleSmall}>
+            <OrbitControls enableZoom={false}></OrbitControls>
+            <ambientLight intensity={0.5} />
+            <directionalLight position={[-2, 5, 2]} intensity={1} />
+            <Suspense fallback={null}>
+              <AnimatedSphereSmall></AnimatedSphereSmall>
+            </Suspense>
+          </Canvas>
+          <Canvas className={styles.assetsPurpleBig}>
+            <OrbitControls enableZoom={false}></OrbitControls>
+            <ambientLight intensity={0.5} />
+            <directionalLight position={[-2, 5, 2]} intensity={1} />
+            <Suspense fallback={null}>
+              <AnimatedSphereBig></AnimatedSphereBig>
+            </Suspense>
+          </Canvas>
+
+          <div className={styles.assets}>
             {/* data-aos="fade-up" data-aos-delay="400" data-aos-easing="ease" */}
             You have:
             <br />
             {/* 将BigNumber转为String */}
-            {utils.formatEther(cdBalance).slice(0, 6)} Crypto Dev Tokens
+            <strong>{utils.formatEther(cdBalance).slice(0, 6)}</strong> Crypto
+            Dev Tokens
             <br />
-            {utils.formatEther(ethBalance).slice(0, 6)} Ether
+            <strong> {utils.formatEther(ethBalance).slice(0, 6)}</strong> Ether
             <br />
-            {utils.formatEther(lpBalance).slice(0, 6)} Crypto Dev LP tokens
+            <strong>{utils.formatEther(lpBalance).slice(0, 6)}</strong> Crypto
+            Dev LP tokens
           </div>
           <div className={styles.wrapper}>
             {/* 如果存储的CD为零，则在询问用户他想要加入多少初始流动性时
@@ -430,7 +468,7 @@ export default function Home() {
       );
     } else {
       return (
-        <div data-aos="fade-up" data-aos-delay="400" data-aos-easing="ease">
+        <div>
           <input
             type="number"
             placeholder="Amount"
@@ -489,7 +527,12 @@ export default function Home() {
       </div>
 
       <div className={styles.pageTwo}>
-        <div className={styles.main}>
+        <div
+          className={styles.main}
+          data-aos="fade-up"
+          data-aos-delay="400"
+          data-aos-easing="ease"
+        >
           <div>
             {/* <h1 className={styles.title}>Welcome to Crypto Devs Exchange!</h1> */}
             <div className={styles.description}>
@@ -514,6 +557,15 @@ export default function Home() {
               </button>
             </div>
           </div>
+
+          {/* <Canvas className="canvas">
+            <OrbitControls enableZoom={false}></OrbitControls>
+            <ambientLight intensity={0.5} />
+            <directionalLight position={[-2, 5, 2]} intensity={1} />
+            <Suspense fallback={null}>
+              <Ethcoin />
+            </Suspense>
+          </Canvas> */}
           {renderButton()}
         </div>
         <div className={styles.footer}> Made with &#10084; by Naomi</div>

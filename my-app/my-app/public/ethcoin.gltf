@@ -1,0 +1,526 @@
+{
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 91,
+      "max": [
+        3
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR",
+      "byteOffset": 0
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 91,
+      "max": [
+        8.228840379280802e-17,
+        0.999418318271637,
+        8.228840379280802e-17,
+        1
+      ],
+      "min": [
+        -8.659314434476259e-17,
+        -0.8572807908058167,
+        -8.659314434476259e-17,
+        -0.45170342922210693
+      ],
+      "type": "VEC4",
+      "byteOffset": 0
+    },
+    {
+      "componentType": 5125,
+      "count": 24,
+      "type": "SCALAR"
+    },
+    {
+      "componentType": 5126,
+      "count": 24,
+      "max": [
+        0.9548861713970409,
+        0.30522710926392504,
+        0.9596930475795971
+      ],
+      "min": [
+        -0.9588951798046337,
+        -0.5660274358356701,
+        -0.9540883036220775
+      ],
+      "type": "VEC3"
+    },
+    {
+      "componentType": 5126,
+      "count": 24,
+      "max": [
+        55.02339458791698,
+        122.87389872466639,
+        52.682561062811416
+      ],
+      "min": [
+        -52.572365979305054,
+        -66.85390971099451,
+        -55.37617609893396
+      ],
+      "type": "VEC3"
+    },
+    {
+      "componentType": 5126,
+      "count": 24,
+      "max": [
+        1.0009775171065494,
+        1.0009775171065494
+      ],
+      "min": [
+        -0.0009775171065493646,
+        -0.0009775171065493646
+      ],
+      "type": "VEC2"
+    },
+    {
+      "componentType": 5125,
+      "count": 27,
+      "type": "SCALAR"
+    },
+    {
+      "componentType": 5126,
+      "count": 21,
+      "max": [
+        0.6118888988214382,
+        1.007843137254902,
+        0.8898430744806924
+      ],
+      "min": [
+        -0.6194836501981698,
+        -1.007843137254902,
+        -0.584666729440876
+      ],
+      "type": "VEC3"
+    },
+    {
+      "componentType": 5126,
+      "count": 21,
+      "max": [
+        50.12300014262905,
+        41.72587515565904,
+        72.99429318866441
+      ],
+      "min": [
+        -50.12292478046128,
+        -33.432598089787454,
+        -33.432598089787454
+      ],
+      "type": "VEC3"
+    },
+    {
+      "componentType": 5126,
+      "count": 21,
+      "max": [
+        1.0009775171065494,
+        1.0009775171065494
+      ],
+      "min": [
+        -0.0009775171065493646,
+        -0.0009775171065493646
+      ],
+      "type": "VEC2"
+    },
+    {
+      "componentType": 5125,
+      "count": 24,
+      "type": "SCALAR"
+    },
+    {
+      "componentType": 5126,
+      "count": 18,
+      "max": [
+        0.6138847603517421,
+        1.007843137254902,
+        0.8917861490857368
+      ],
+      "min": [
+        -0.6174877886678658,
+        -1.007843137254902,
+        -0.46507659601230245
+      ],
+      "type": "VEC3"
+    },
+    {
+      "componentType": 5126,
+      "count": 18,
+      "max": [
+        50.12300014262905,
+        41.72587515565904,
+        72.99429318866441
+      ],
+      "min": [
+        -50.12292478046128,
+        -33.432598089787454,
+        -33.432598089787454
+      ],
+      "type": "VEC3"
+    },
+    {
+      "componentType": 5126,
+      "count": 18,
+      "max": [
+        1.0009775171065494,
+        1.0009775171065494
+      ],
+      "min": [
+        -0.0009775171065493646,
+        -0.0009775171065493646
+      ],
+      "type": "VEC2"
+    }
+  ],
+  "animations": [
+    {
+      "channels": [
+        {
+          "sampler": 0,
+          "target": {
+            "node": 4,
+            "path": "rotation"
+          }
+        }
+      ],
+      "name": "CINEMA_4D_Main",
+      "samplers": [
+        {
+          "input": 0,
+          "interpolation": "LINEAR",
+          "output": 1
+        }
+      ]
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "zzyeo (https://sketchfab.com/zzyeo)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/ethereum-coin-a8ece89bbf6a4cdd892c92efc8021dd8",
+      "title": "Ethereum Coin"
+    },
+    "generator": "Sketchfab-12.68.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 364,
+      "byteOffset": 0,
+      "name": "floatBufferViews"
+    },
+    {
+      "buffer": 0,
+      "byteLength": 1456,
+      "byteOffset": 368,
+      "byteStride": 16,
+      "name": "floatBufferViews"
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 1824,
+      "byteLength": 265
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 2096,
+      "byteLength": 250
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 2352,
+      "byteLength": 238
+    }
+  ],
+  "buffers": [
+    {
+      "name": "ethcoin",
+      "byteLength": 2592,
+      "uri": "data:application/octet-stream;base64,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"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "C_Silver_Base",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.8,
+          0.8,
+          0.8,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.6
+      },
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "alphaMode": "OPAQUE"
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Pyramid_3_C_Silver_Base_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 3,
+            "POSITION": 4,
+            "TEXCOORD_0": 5
+          },
+          "indices": 2,
+          "material": 0,
+          "mode": 4,
+          "extensions": {
+            "KHR_draco_mesh_compression": {
+              "bufferView": 2,
+              "attributes": {
+                "NORMAL": 0,
+                "POSITION": 1,
+                "TEXCOORD_0": 2
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pyramid_1_C_Silver_Base_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 7,
+            "POSITION": 8,
+            "TEXCOORD_0": 9
+          },
+          "indices": 6,
+          "material": 0,
+          "mode": 4,
+          "extensions": {
+            "KHR_draco_mesh_compression": {
+              "bufferView": 3,
+              "attributes": {
+                "NORMAL": 0,
+                "POSITION": 1,
+                "TEXCOORD_0": 2
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pyramid_C_Silver_Base_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 11,
+            "POSITION": 12,
+            "TEXCOORD_0": 13
+          },
+          "indices": 10,
+          "material": 0,
+          "mode": 4,
+          "extensions": {
+            "KHR_draco_mesh_compression": {
+              "bufferView": 4,
+              "attributes": {
+                "NORMAL": 0,
+                "POSITION": 1,
+                "TEXCOORD_0": 2
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        2.220446049250313e-16,
+        -3.828568672208042e-16,
+        1,
+        0,
+        1,
+        1.6081226229577296e-16,
+        -2.2204460492503128e-16,
+        0,
+        -1.6081226229577292e-16,
+        1,
+        3.828568672208042e-16,
+        0,
+        -0.009770807810127735,
+        2.3233071999806536e-7,
+        -0.01000616978853941,
+        1
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "matrix": [
+        0.009999999776482582,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.009999999776482582,
+        0,
+        0,
+        -0.009999999776482582,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": "35c758118ce74fb2911114a2add11458.fbx"
+    },
+    {
+      "children": [
+        3
+      ],
+      "name": "Object_2"
+    },
+    {
+      "children": [
+        4
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        5,
+        7,
+        9
+      ],
+      "name": "eth",
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "children": [
+        6
+      ],
+      "name": "Pyramid_3",
+      "rotation": [
+        0,
+        0.38268348574638367,
+        0,
+        0.9238796234130859
+      ],
+      "translation": [
+        0.21673527359962463,
+        72.60365295410156,
+        0.9291427731513977
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "mesh": 0,
+      "name": "Pyramid_3_C_Silver_Base_0"
+    },
+    {
+      "children": [
+        8
+      ],
+      "name": "Pyramid_1",
+      "rotation": [
+        0,
+        0.7071068286895752,
+        0.7071068286895752,
+        -8.659561926915534e-17
+      ],
+      "translation": [
+        -0.10836763679981232,
+        -36.30182647705078,
+        32.91608428955078
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "mesh": 1,
+      "name": "Pyramid_1_C_Silver_Base_0"
+    },
+    {
+      "children": [
+        10
+      ],
+      "name": "Pyramid",
+      "rotation": [
+        -0.7071068286895752,
+        0,
+        0,
+        0.7071068286895752
+      ],
+      "translation": [
+        -0.10836763679981232,
+        -36.30182647705078,
+        -33.84523010253906
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "mesh": 2,
+      "name": "Pyramid_C_Silver_Base_0"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "extensionsRequired": [
+    "KHR_draco_mesh_compression"
+  ],
+  "extensionsUsed": [
+    "KHR_draco_mesh_compression"
+  ]
+}
