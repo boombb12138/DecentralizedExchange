@@ -1,8 +1,8 @@
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 ### Decentralized Exchange on Goerli
+
+![GIF 2022-12-3 16-32-17](https://user-images.githubusercontent.com/95857565/205432258-6f3fb54a-f4ec-4a57-9331-9d05cf3ee5c9.gif)
+
 
 ### Summarize
 
