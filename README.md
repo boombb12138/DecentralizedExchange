@@ -1,6 +1,49 @@
 
+### Decentralized Exchange on Goerli
+
+### Summarize
+
+DEX is divided into 2 parts: front-end and contract
+
+The functions of DEX are as follows:
+
+- Anyone can add liquidity to become a liquidity provider
+- Liquidity providers can withdraw their liquidity and get their cryptocurrency back at any time
+- Users can exchange between assets in the trading pool, provided there is sufficient liquidity
+- Users are charged a small transaction fee, which is split among liquidity providers so that they can earn money by providing liquidity
+
+### Overview
+
+This exchange contains only one trading pair, namely ETH and Krypto Devtoken
+
+##### The smart contract mainly implements 3 functions
+
+1. When adding liquidity:
+
+- If there is no asset in the pool and the initial value of the two tokens is 0, then accept any eth or Crypto Devtoken provided by the user and give the user LP tokens
+- If there are assets in the pool, receive the eth provided by the user, and determine how much Crypto Devtoken the user needs to provide to the contract according to the ratio, and give the user LP tokens
+
+2. When removing liquidity:
+
+![公式](https://user-images.githubusercontent.com/95857565/205418962-0765c63a-168b-4ea3-9c6a-aa8eda1c3c63.png)
+![公式2](https://user-images.githubusercontent.com/95857565/205418965-9d8cf598-9307-43bf-b79f-bc599d434872.png)
 
 
+
+3. exchange
+
+##### The front end mainly uses React, Three.js
+
+### Require
+
+1. VSCode or other IDE
+2. React
+3. next
+4. web3modal
+5. three
+
+
+================================================================
 ### 建造一个类似于Uniswap的去中心化交易所😀  
 
 这个repo里包含了Uniswap的原理图，我整合了知乎上的一篇文章（链接在导图里面有）和LW3的教程，做了总结性的思维导图 :wink:
