@@ -172,7 +172,7 @@ export default function Home() {
 
         // 调用utils里的addLiquidity函数
         await addLiquidity(signer, addCDTokens, addEtherWei);
-        setLoading(true);
+        setLoading(false);
         //这里重新初始化 CD Token 在上面的代码中哪里修改过addCDTokens用户想要添加到流动性池的CD Token的数量的值
         // 在addLiquidity中
         // 重新初始化 CD Token
@@ -517,6 +517,12 @@ export default function Home() {
         <title>Crypto Devs</title>
         <meta name="description" content="Whitelist-Dapp" />
         <link rel="icon" href="/favicon.ico" />
+        {/* <audio autoplay="autoplay" controls="controls">
+          <source
+            src="https://music.163.com/#/discover/toplist?id=7356827205"
+            type="audio/mpeg"
+          />
+        </audio> */}
       </Head>
 
       <canvas className={styles.webgl} id="webgl"></canvas>

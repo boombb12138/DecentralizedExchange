@@ -32,7 +32,9 @@
 
 .footer {
   position: fixed;
-  /* bottom: -30%; */
+  bottom: 0%;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   padding: 5px 0;
   border-top: 0.3px solid #9c9c9c;
@@ -81,6 +83,7 @@
   font-size: 2rem;
   line-height: 2rem;
   font-weight: 700;
+  margin-top: -10px;
 }
 
 .wrapper {
@@ -90,7 +93,7 @@
   transform: translateX(-50%);
 
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 
   background-color: #1a1a1a;
   border-radius: 5%;
@@ -99,11 +102,10 @@
 
 .wrapperOne {
   left: 40%;
-  display: flex;
 }
 
 .wrapperTwo {
-  display: flex;
+  /* display: flex; */
 }
 
 .assetsPurple {

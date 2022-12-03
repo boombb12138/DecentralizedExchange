@@ -4,6 +4,7 @@ export const LoadingWrapper = styled.div`
   @import url(https://fonts.googleapis.com/css?family=Open+Sans:300);
 
   body {
+    margin-top: 88px;
     background-color: #f1c40f;
     overflow: hidden;
   }
@@ -15,13 +16,13 @@ export const LoadingWrapper = styled.div`
     font-size: 12px;
     text-transform: uppercase;
     left: 50%;
-    bottom: -50%;
+    bottom: -100%;
     margin-left: -20px;
   }
 
   .body {
     position: absolute;
-    /* top: 50%; */
+    bottom: -40%;
     margin-left: -50px;
     left: 50%;
     animation: speeder 0.4s linear infinite;
