@@ -4,12 +4,17 @@ import React, { Suspense, useEffect, useRef, useState } from "react";
 import Web3Modal from "web3modal";
 import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, useTexture } from "@react-three/drei";
 
 import { OrbitControls as OrbitBackground } from "three/examples/jsm/controls/OrbitControls.js";
 import TypeIt from "typeit-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import {
+  Sphere,
+  MeshDistortMaterial,
+  MeshStandardMaterial,
+} from "@react-three/drei";
 
 import styles from "../styles/Home.module.css";
 import { addLiquidity, calculateCD } from "../utils/addLiquidity";
@@ -28,6 +33,7 @@ import {
   AnimatedSphere,
   AnimatedSphereBig,
   AnimatedSphereSmall,
+  EarthSphere,
 } from "./components/AnimatedSphere";
 import { Ethcoin } from "./components/Ethcoin";
 import Loading from "./components/Loading/Loading";
@@ -281,44 +287,48 @@ export default function Home() {
   }, [walletConnected]);
 
   // ==================Three.js==================
-  useEffect(() => {
-    const scene = new THREE.Scene();
-    // scene.background = null;
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
-    );
+  // useEffect(() => {
+  //   const scene = new THREE.Scene();
+  //   // scene.background = null;
+  //   const camera = new THREE.PerspectiveCamera(
+  //     75,
+  //     window.innerWidth / window.innerHeight,
+  //     0.1,
+  //     1000
+  //   );
 
-    const canvas = document.getElementById("webgl");
-    const renderer = new THREE.WebGLRenderer({ canvas: canvas });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    // document.body.appendChild(renderer.domElement); //创建画布canvas
+  //   const canvas = document.getElementById("webgl");
+  //   const renderer = new THREE.WebGLRenderer({
+  //     canvas: canvas,
+  //     antialias: true,
+  //     alpha: true, ////清除背景色法1 使canvas背景为透明
+  //   });
+  //   renderer.setSize(window.innerWidth, window.innerHeight);
+  //   document.body.appendChild(renderer.domElement); //创建画布canvas
 
-    const controls = new OrbitBackground(camera, canvas);
-    controls.update();
+  //   const controls = new OrbitBackground(camera, canvas);
+  //   controls.update();
 
-    const geometry = new THREE.SphereGeometry(2, 32, 32);
-    // 换球体的材质为宇宙背景的图片
-    const textureLoader = new THREE.TextureLoader();
-    const texture = textureLoader.load("texture.png");
-    const material = new THREE.MeshBasicMaterial({ map: texture });
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+  //   const geometry = new THREE.SphereGeometry(2, 32, 32);
+  //   // 换球体的材质为宇宙背景的图片
+  //   const textureLoader = new THREE.TextureLoader();
+  //   const texture = textureLoader.load("texture.png");
+  //   const material = new THREE.MeshBasicMaterial({ map: texture });
+  //   const cube = new THREE.Mesh(geometry, material);
+  //   scene.add(cube);
 
-    camera.position.z = 5;
+  //   camera.position.z = 5;
 
-    function animate() {
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01;
-      requestAnimationFrame(animate);
-      controls.update();
-      renderer.render(scene, camera);
-    }
+  //   function animate() {
+  //     cube.rotation.x += 0.01;
+  //     cube.rotation.y += 0.01;
+  //     requestAnimationFrame(animate);
+  //     controls.update();
+  //     renderer.render(scene, camera);
+  //   }
 
-    animate();
-  }, []);
+  //   animate();
+  // }, []);
   // ==================Three.js end===================
 
   useEffect(() => {
@@ -513,7 +523,7 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <div style={{ background: "#000" }}>
       <Head>
         <title>Crypto Devs</title>
         <meta name="description" content="Whitelist-Dapp" />
@@ -523,10 +533,39 @@ export default function Home() {
             src="https://music.163.com/#/discover/toplist?id=7356827205"
             type="audio/mpeg"
           />
+          
         </audio> */}
       </Head>
 
-      <canvas className={styles.webgl} id="webgl"></canvas>
+      {/* <canvas className={styles.webgl} id="webgl" /> */}
+
+      <Canvas className={styles.assetsPurple}>
+        <OrbitControls enableZoom={false}></OrbitControls>
+        <ambientLight intensity={0.5} />
+        <directionalLight position={[-2, 5, 2]} intensity={1} />
+        <Suspense fallback={null}>
+          <AnimatedSphere></AnimatedSphere>
+        </Suspense>
+      </Canvas>
+      <Canvas className={styles.assetsPurpleSmall}>
+        <OrbitControls enableZoom={false}></OrbitControls>
+        <ambientLight intensity={0.5} />
+        <directionalLight position={[-2, 5, 2]} intensity={1} />
+        <Suspense fallback={null}>
+          <AnimatedSphereSmall></AnimatedSphereSmall>
+        </Suspense>
+      </Canvas>
+      <Canvas className={styles.assetsPurpleBig}>
+        <OrbitControls enableZoom={false}></OrbitControls>
+        <ambientLight intensity={0.5} />
+        <directionalLight position={[-2, 5, 2]} intensity={1} />
+        <Suspense fallback={null}>
+          <AnimatedSphereBig></AnimatedSphereBig>
+        </Suspense>
+      </Canvas>
+
+      {/* <Ethcoin /> */}
+
       <div className={styles.typeIt}>
         <TypeIt className={styles.title}>
           Welcome to Crypto Devs Exchange!
