@@ -213,7 +213,8 @@ export default function Home() {
 
   // 在用户从流动性中删除' removeLPTokenWei '数量的LP Token后
   // 计算要返回给用户的' Ether '和' CD '令牌的数量
-  // todo 这个函数和上面那个有什么区别
+  //  这个函数是在计算要给用户返回多少' Ether '和' CD '令牌
+  //  _removeLiquidity函数是真正地给用户返回' Ether '和' CD '令牌
   const _getTokensAfterRemove = async (_removeLPTokens) => {
     try {
       const provider = await getProviderOrSigner();
