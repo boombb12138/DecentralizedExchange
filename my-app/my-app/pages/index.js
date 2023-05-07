@@ -33,8 +33,8 @@ import {
   AnimatedSphereBig,
   AnimatedSphereSmall,
   EarthSphere,
-} from "./components/AnimatedSphere";
-import AnimatedSphere from "./components/AnimatedSphere";
+} from "../components/AnimatedSphere";
+import AnimatedSphere from "../components/AnimatedSphere";
 
 import Loading from "../components/Loading/Loading";
 

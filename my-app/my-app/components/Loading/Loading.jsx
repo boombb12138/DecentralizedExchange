@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { LoadingWrapper } from "../../../style";
+import { LoadingWrapper } from "./style";
 export default memo(function Loading() {
   return (
     <LoadingWrapper>
