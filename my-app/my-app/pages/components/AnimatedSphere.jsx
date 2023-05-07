@@ -33,7 +33,7 @@ const EarthSphere = memo(() => {
     </Sphere>
   );
 });
-const AnimatedSphere = memo(() => {
+export default function AnimatedSphere() {
   return (
     <Sphere visible args={[1, 100, 200]} scale={1.8}>
       <MeshDistortMaterial
@@ -44,7 +44,8 @@ const AnimatedSphere = memo(() => {
       />
     </Sphere>
   );
-});
+}
+
 const AnimatedSphereBig = memo(() => {
   return (
     <Sphere visible args={[1, 100, 200]} scale={2.8}>
@@ -58,4 +59,4 @@ const AnimatedSphereBig = memo(() => {
   );
 });
 
-export { AnimatedSphereSmall, AnimatedSphere, AnimatedSphereBig, EarthSphere };
+export { AnimatedSphereSmall, AnimatedSphereBig, EarthSphere };

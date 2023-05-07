@@ -30,11 +30,11 @@ import {
 } from "../utils/removeLiquidity";
 import { swapTokens, getAmountOfTokensReceivedFromSwap } from "../utils/swap";
 import {
-  AnimatedSphere,
   AnimatedSphereBig,
   AnimatedSphereSmall,
   EarthSphere,
 } from "./components/AnimatedSphere";
+import AnimatedSphere from "./components/AnimatedSphere";
 import { Ethcoin } from "./components/Ethcoin";
 import Loading from "./components/Loading/Loading";
 
