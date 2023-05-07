@@ -36,7 +36,7 @@ import {
 } from "./components/AnimatedSphere";
 import AnimatedSphere from "./components/AnimatedSphere";
 
-import Loading from "./components/Loading/Loading";
+import Loading from "../components/Loading/Loading";
 
 export default function Home() {
   // =============================state variables ========================
