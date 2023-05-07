@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { LoadingWrapper } from "./style";
-export default function Loading() {
+export default memo(function Loading() {
   return (
     <LoadingWrapper>
       <div class="body">
@@ -18,4 +18,4 @@ export default function Loading() {
       <h1>Loading</h1>
     </LoadingWrapper>
   );
-}
+});
