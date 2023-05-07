@@ -35,7 +35,7 @@ import {
   EarthSphere,
 } from "./components/AnimatedSphere";
 import AnimatedSphere from "./components/AnimatedSphere";
-import { Ethcoin } from "./components/Ethcoin";
+
 import Loading from "./components/Loading/Loading";
 
 export default function Home() {
