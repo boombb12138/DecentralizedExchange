@@ -286,13 +286,13 @@ export default function Home() {
     if (!walletConnected) {
       // 通过设置Web3Modal类的“current”值，将它分配给引用对象
       //只要这个页面是打开的，' current '值就会一直保持
-      web3ModalRef.current = new Web3Modal({
-        network: "goerli",
-        providerOptions: {},
-        disableInjectedProvider: false,
-      });
-      connectWallet();
-      getAmounts();
+      // web3ModalRef.current = new Web3Modal({
+      //   network: "goerli",
+      //   providerOptions: {},
+      //   disableInjectedProvider: false,
+      // });
+      // connectWallet();
+      // getAmounts();
     }
   }, [walletConnected]);
 
