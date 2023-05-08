@@ -92,10 +92,10 @@ export default function Home() {
 
   // 连接钱包
   const web3ModalRef = useRef();
-  // const [walletConnected, setWalletConnected] = useState(false);
+  const [walletConnected, setWalletConnected] = useState(false);
   // const { address, isConnected, isDisconnected } = useAccount();
   // const walletConnected = isDisconnected;
-  const walletConnected = useSelector((state) => state.isConnected.value);
+  // const walletConnected = useSelector((state) => state.isConnected.value);
 
   // getamount调用各种函数来检索ethbalance ，LP令牌等，
   const getAmounts = async () => {
@@ -258,13 +258,18 @@ export default function Home() {
       // 从web3Modal获取provider，在我们的例子中是MetaMask
       //第一次使用时，它会提示用户连接他们的钱包
       await getProviderOrSigner();
-      // setWalletConnected(true);
+      setWalletConnected(true);
     } catch (err) {
       console.error(err);
     }
   };
 
   const getProviderOrSigner = async (needSigner = false) => {
+    web3ModalRef.current = new Web3Modal({
+      network: "goerli",
+      providerOptions: {},
+      disableInjectedProvider: false,
+    });
     const provider = await web3ModalRef.current.connect();
     const web3Provider = new providers.Web3Provider(provider);
 
@@ -296,45 +301,37 @@ export default function Home() {
     }
   }, [walletConnected]);
 
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      easing: "ease-out-back",
-      delay: 600,
-    });
-  }, []);
-
   // ============================= RENDER FUNCTIONS========================
   const renderButton = () => {
     // // 提示连接钱包的按钮
-    // if (!walletConnected) {
-    //   return (
-    //     // <button onClick={connectWallet} className={styles.button}>
-    //     //   Connect Wallet
-    //     // </button>
-    //     <div
-    //       style={{
-    //         border: "1px solid #b6b5b5",
-    //         borderRadius: "20px",
-    //         padding: "10px",
-    //         fontSize: "14px",
-    //         display: "flex",
-    //         justifyContent: "center",
-    //         margin: "auto",
-    //         width: "20%",
-    //       }}
-    //     >
-    //       <ConnectWalletButton></ConnectWalletButton>
-    //     </div>
-    //   );
-    // }
+    if (!walletConnected) {
+      return (
+        <button onClick={connectWallet} className={styles.button}>
+          Connect Wallet
+        </button>
+        // <div
+        //   style={{
+        //     border: "1px solid #b6b5b5",
+        //     borderRadius: "20px",
+        //     padding: "10px",
+        //     fontSize: "14px",
+        //     display: "flex",
+        //     justifyContent: "center",
+        //     margin: "auto",
+        //     width: "20%",
+        //   }}
+        // >
+        //   <ConnectWalletButton></ConnectWalletButton>
+        // </div>
+      );
+    }
 
     if (loading) {
       // return <button className={styles.button}>loading</button>;
       return <Loading />;
     }
 
-    if (walletConnected || liquidityTab) {
+    if (liquidityTab) {
       return (
         <div>
           {/* <Canvas className={styles.assetsPurple}>
@@ -463,7 +460,7 @@ export default function Home() {
           </div>
         </div>
       );
-    } else if (walletConnected || !liquidityTab) {
+    } else {
       return (
         <div>
           <input
@@ -511,7 +508,7 @@ export default function Home() {
 
   return (
     <WagmiConfig client={wagmiClient}>
-      <div>
+      <div style={{ height: "100vh" }}>
         <Head>
           <title>Crypto Devs</title>
           <meta name="description" content="Whitelist-Dapp" />

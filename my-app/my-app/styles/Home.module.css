@@ -17,6 +17,7 @@
   font-family: "Sequel 100 Wide", sans-serif;
   color: #ffffff;
   text-align: center;
+  height: 90%;
 }
 
 .webgl {
@@ -35,7 +36,7 @@
 .pageTwo {
   background-color: black;
   width: 100%;
-
+  height: 100%;
 }
 
 .footer {
@@ -88,7 +89,7 @@
 .description {
   line-height: 1;
   font-size: 2rem;
-  line-height: 2rem;
+  line-height: 5rem;
   font-weight: 700;
 
 }

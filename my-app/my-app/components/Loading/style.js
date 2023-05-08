@@ -16,7 +16,7 @@ export const LoadingWrapper = styled.div`
     font-size: 12px;
     text-transform: uppercase;
     left: 50%;
-    bottom: -100%;
+    bottom: -50%;
     margin-left: -20px;
   }
 
