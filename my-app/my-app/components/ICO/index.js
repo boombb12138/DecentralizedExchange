@@ -328,7 +328,7 @@ export default function Home() {
             </div>
           ) : (
             <button onClick={connectWallet} className={styles.button}>
-              Connect your wallet
+              Connect
             </button>
           )}
         </div>
