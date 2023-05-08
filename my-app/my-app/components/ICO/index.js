@@ -294,7 +294,7 @@ export default function Home() {
           disabled={!(tokenAmount > 0)}
           onClick={() => mintCryptoDevToken(tokenAmount)}
         >
-          Mint Tokens
+          Mint
         </button>
       </div>
     );

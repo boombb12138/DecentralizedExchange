@@ -46,15 +46,20 @@
 }
 
 .button {
-    border-radius: 4px;
-    background-color: blue;
+
+    white-space: nowrap;
+    border-radius: 20px;
+    background-color: #8352FD;
     border: none;
-    color: #ffffff;
+    color: #000000e5;
     font-size: 15px;
-    padding: 5px;
+    font-weight: 600;
+    padding: 10px;
+    width: 100px;
     width: 100px;
     cursor: pointer;
-    margin-bottom: 2%;
+    margin: 2%;
+
 }
 
 @media (max-width: 1000px) {
