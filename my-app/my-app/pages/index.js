@@ -528,32 +528,34 @@ export default function Home() {
         {/* <canvas className={styles.webgl} id="webgl" /> */}
         <Header></Header>
 
-        <Canvas
-          style={{ position: "absolute", background: "#000" }}
-          gl={{
-            antialias: true,
-            toneMapping: THREE.ACESFilmicToneMapping,
-            outputEncoding: THREE.sRGBEncoding,
-          }}
-          camera={{
-            fov: 45,
-            near: 0.1,
-            far: 200,
-            position: [2, 3, 3],
-          }}
-        >
-          <OrbitControls enableZoom={false}></OrbitControls>
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[-2, 5, 2]} intensity={1} />
-          <Suspense fallback={null}>
-            <EarthSphere />
-          </Suspense>
-        </Canvas>
+        <div className={styles.pageOne}>
+          <Canvas
+            style={{ position: "absolute", background: "#000" }}
+            gl={{
+              antialias: true,
+              toneMapping: THREE.ACESFilmicToneMapping,
+              outputEncoding: THREE.sRGBEncoding,
+            }}
+            camera={{
+              fov: 45,
+              near: 0.1,
+              far: 200,
+              position: [2, 3, 3],
+            }}
+          >
+            <OrbitControls enableZoom={false}></OrbitControls>
+            <ambientLight intensity={0.5} />
+            <directionalLight position={[-2, 5, 2]} intensity={1} />
+            <Suspense fallback={null}>
+              <EarthSphere />
+            </Suspense>
+          </Canvas>
 
-        <div className={styles.typeIt}>
-          <TypeIt className={styles.title}>
-            Welcome to Crypto Devs Exchange!
-          </TypeIt>
+          <div className={styles.typeIt}>
+            <TypeIt className={styles.title}>
+              Welcome to Crypto Devs Exchange!
+            </TypeIt>
+          </div>
         </div>
 
         <div className={styles.pageTwo}>
