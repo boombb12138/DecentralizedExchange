@@ -549,9 +549,10 @@ export default function Home() {
           </Canvas>
 
           <div className={styles.typeIt}>
-            <TypeIt className={styles.title}>
-              Welcome to Crypto Devs Exchange!
-            </TypeIt>
+            <div className={styles.title}>Welcome to Crypto Devs Exchange!</div>
+            {/* <TypeIt className={styles.title}> */}
+            Welcome to Crypto Devs Exchange!
+            {/* </TypeIt> */}
           </div>
         </div>
 
