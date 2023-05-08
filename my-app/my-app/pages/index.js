@@ -551,7 +551,7 @@ export default function Home() {
           <div className={styles.typeIt}>
             <div className={styles.title}>Welcome to Crypto Devs Exchange!</div>
             {/* <TypeIt className={styles.title}> */}
-            Welcome to Crypto Devs Exchange!
+            {/* Welcome to Crypto Devs Exchange! */}
             {/* </TypeIt> */}
           </div>
         </div>

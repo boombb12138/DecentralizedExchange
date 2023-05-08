@@ -25,7 +25,7 @@ const AnimatedSphereSmall = memo(() => {
   );
 });
 const EarthSphere = memo(() => {
-  const textureEarth = useTexture("texture.png");
+  const textureEarth = useTexture("texture.jpeg");
   const earthRef = useRef();
 
   useFrame((state, delta) => {
