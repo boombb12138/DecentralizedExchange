@@ -1,3 +1,5 @@
+import { useRef } from "react";
+import { useFrame } from "@react-three/fiber";
 import React, { memo } from "react";
 import {
   Sphere,
@@ -7,7 +9,12 @@ import {
 } from "@react-three/drei";
 const AnimatedSphereSmall = memo(() => {
   return (
-    <Sphere visible args={[1, 100, 200]} scale={0.8}>
+    <Sphere
+      visible
+      args={[1, 100, 200]}
+      scale={0.8}
+      style={{ position: "absolute" }}
+    >
       <MeshDistortMaterial
         color="#8352FD"
         attach="material"
@@ -19,23 +26,28 @@ const AnimatedSphereSmall = memo(() => {
 });
 const EarthSphere = memo(() => {
   const textureEarth = useTexture("texture.png");
+  const earthRef = useRef();
+
+  useFrame((state, delta) => {
+    const angle = state.clock.elapsedTime;
+    earthRef.current.rotation.x += 0.01;
+  });
 
   return (
-    <Sphere visible args={[1, 100, 200]} scale={1.8}>
-      {/* <MeshStandardMaterial /> */}
-      {/* //map={textureEarth} */}
-      <MeshDistortMaterial
-        color="#8352FD"
-        attach="material"
-        speed={1.5}
-        roughness={2}
-      />
-    </Sphere>
+    <mesh ref={earthRef} scale={1.5}>
+      <sphereGeometry scale={1.5} />
+      <meshStandardMaterial map={textureEarth} />
+    </mesh>
   );
 });
 export default function AnimatedSphere() {
   return (
-    <Sphere visible args={[1, 100, 200]} scale={1.8}>
+    <Sphere
+      visible
+      args={[1, 100, 200]}
+      scale={1.8}
+      style={{ position: "absolute" }}
+    >
       <MeshDistortMaterial
         color="#8352FD"
         attach="material"
@@ -48,7 +60,12 @@ export default function AnimatedSphere() {
 
 const AnimatedSphereBig = memo(() => {
   return (
-    <Sphere visible args={[1, 100, 200]} scale={2.8}>
+    <Sphere
+      visible
+      args={[1, 100, 200]}
+      scale={2.8}
+      style={{ position: "absolute" }}
+    >
       <MeshDistortMaterial
         color="#8352FD"
         attach="material"

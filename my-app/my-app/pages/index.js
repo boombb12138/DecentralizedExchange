@@ -6,6 +6,7 @@ import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useTexture } from "@react-three/drei";
 
+import { useSelector, useDispatch } from "react-redux";
 import { OrbitControls as OrbitBackground } from "three/examples/jsm/controls/OrbitControls.js";
 import TypeIt from "typeit-react";
 import AOS from "aos";
@@ -15,6 +16,7 @@ import {
   MeshDistortMaterial,
   MeshStandardMaterial,
 } from "@react-three/drei";
+import { WagmiConfig, useAccount } from "wagmi";
 
 import styles from "../styles/Home.module.css";
 import { addLiquidity, calculateCD } from "../utils/addLiquidity";
@@ -37,6 +39,10 @@ import {
 import AnimatedSphere from "../components/AnimatedSphere";
 
 import Loading from "../components/Loading/Loading";
+import Header from "../components/Header";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { ConnectWalletButton } from "../components/ConnectWallet";
+import { wagmiClient } from "../components/ConnectWallet";
 
 export default function Home() {
   // =============================state variables ========================
@@ -86,7 +92,10 @@ export default function Home() {
 
   // 连接钱包
   const web3ModalRef = useRef();
-  const [walletConnected, setWalletConnected] = useState(false);
+  // const [walletConnected, setWalletConnected] = useState(false);
+  // const { address, isConnected, isDisconnected } = useAccount();
+  // const walletConnected = isDisconnected;
+  const walletConnected = useSelector((state) => state.isConnected.value);
 
   // getamount调用各种函数来检索ethbalance ，LP令牌等，
   const getAmounts = async () => {
@@ -221,7 +230,7 @@ export default function Home() {
   // 计算要返回给用户的' Ether '和' CD '令牌的数量
   //  这个函数是在计算要给用户返回多少' Ether '和' CD '令牌
   //  _removeLiquidity函数是真正地给用户返回' Ether '和' CD '令牌
-  const _getTokensAfterRemove = async (_removeLPTokens) => {
+  const _getTokensAfterRemremoveCDneeove = async (_removeLPTokens) => {
     try {
       const provider = await getProviderOrSigner();
       // 将用户输入的LP Token转为BigNumebr
@@ -236,6 +245,7 @@ export default function Home() {
         _ethBalance,
         cryptoDevTokenReserve
       );
+      console.log("|_removeEther", _removeEther);
       setRemoveEther(_removeEther);
       setRemoveCD(_removeCD);
     } catch (err) {
@@ -248,7 +258,7 @@ export default function Home() {
       // 从web3Modal获取provider，在我们的例子中是MetaMask
       //第一次使用时，它会提示用户连接他们的钱包
       await getProviderOrSigner();
-      setWalletConnected(true);
+      // setWalletConnected(true);
     } catch (err) {
       console.error(err);
     }
@@ -286,51 +296,6 @@ export default function Home() {
     }
   }, [walletConnected]);
 
-  // ==================Three.js==================
-  // useEffect(() => {
-  //   const scene = new THREE.Scene();
-  //   // scene.background = null;
-  //   const camera = new THREE.PerspectiveCamera(
-  //     75,
-  //     window.innerWidth / window.innerHeight,
-  //     0.1,
-  //     1000
-  //   );
-
-  //   const canvas = document.getElementById("webgl");
-  //   const renderer = new THREE.WebGLRenderer({
-  //     canvas: canvas,
-  //     antialias: true,
-  //     alpha: true, ////清除背景色法1 使canvas背景为透明
-  //   });
-  //   renderer.setSize(window.innerWidth, window.innerHeight);
-  //   document.body.appendChild(renderer.domElement); //创建画布canvas
-
-  //   const controls = new OrbitBackground(camera, canvas);
-  //   controls.update();
-
-  //   const geometry = new THREE.SphereGeometry(2, 32, 32);
-  //   // 换球体的材质为宇宙背景的图片
-  //   const textureLoader = new THREE.TextureLoader();
-  //   const texture = textureLoader.load("texture.png");
-  //   const material = new THREE.MeshBasicMaterial({ map: texture });
-  //   const cube = new THREE.Mesh(geometry, material);
-  //   scene.add(cube);
-
-  //   camera.position.z = 5;
-
-  //   function animate() {
-  //     cube.rotation.x += 0.01;
-  //     cube.rotation.y += 0.01;
-  //     requestAnimationFrame(animate);
-  //     controls.update();
-  //     renderer.render(scene, camera);
-  //   }
-
-  //   animate();
-  // }, []);
-  // ==================Three.js end===================
-
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -341,24 +306,38 @@ export default function Home() {
 
   // ============================= RENDER FUNCTIONS========================
   const renderButton = () => {
-    // 提示连接钱包的按钮
-    if (!walletConnected) {
-      return (
-        <button onClick={connectWallet} className={styles.button}>
-          Connect your wallet
-        </button>
-      );
-    }
+    // // 提示连接钱包的按钮
+    // if (!walletConnected) {
+    //   return (
+    //     // <button onClick={connectWallet} className={styles.button}>
+    //     //   Connect Wallet
+    //     // </button>
+    //     <div
+    //       style={{
+    //         border: "1px solid #b6b5b5",
+    //         borderRadius: "20px",
+    //         padding: "10px",
+    //         fontSize: "14px",
+    //         display: "flex",
+    //         justifyContent: "center",
+    //         margin: "auto",
+    //         width: "20%",
+    //       }}
+    //     >
+    //       <ConnectWalletButton></ConnectWalletButton>
+    //     </div>
+    //   );
+    // }
 
     if (loading) {
       // return <button className={styles.button}>loading</button>;
       return <Loading />;
     }
 
-    if (liquidityTab) {
+    if (walletConnected || liquidityTab) {
       return (
         <div>
-          <Canvas className={styles.assetsPurple}>
+          {/* <Canvas className={styles.assetsPurple}>
             <OrbitControls enableZoom={false}></OrbitControls>
             <ambientLight intensity={0.5} />
             <directionalLight position={[-2, 5, 2]} intensity={1} />
@@ -381,107 +360,115 @@ export default function Home() {
             <Suspense fallback={null}>
               <AnimatedSphereBig></AnimatedSphereBig>
             </Suspense>
-          </Canvas>
-
-          <div className={styles.assets}>
-            {/* data-aos="fade-up" data-aos-delay="400" data-aos-easing="ease" */}
-            You have:
-            <br />
-            {/* 将BigNumber转为String */}
-            <strong>{utils.formatEther(cdBalance).slice(0, 6)}</strong> Crypto
-            Dev Tokens
-            <br />
-            <strong> {utils.formatEther(ethBalance).slice(0, 6)}</strong> Ether
-            <br />
-            <strong>{utils.formatEther(lpBalance).slice(0, 6)}</strong> Crypto
-            Dev LP tokens
-          </div>
-          <div className={styles.wrapper}>
-            {/* 如果存储的CD为零，则在询问用户他想要加入多少初始流动性时
+          </Canvas> */}
+          <div style={{ background: "#000" }}>
+            <div className={styles.assets}>
+              {/* data-aos="fade-up" data-aos-delay="400" data-aos-easing="ease" */}
+              You have:
+              <br />
+              {/* 将BigNumber转为String */}
+              <strong>{utils.formatEther(cdBalance).slice(0, 6)}</strong> Crypto
+              Dev Tokens
+              <br />
+              <strong> {utils.formatEther(ethBalance).slice(0, 6)}</strong>{" "}
+              Ether
+              <br />
+              <strong>{utils.formatEther(lpBalance).slice(0, 6)}</strong> Crypto
+              Dev LP tokens
+            </div>
+            <div className={styles.wrapper}>
+              {/* 如果存储的CD为零，则在询问用户他想要加入多少初始流动性时
                 将流动性状态渲染为零
                 否则渲染这样的状态：流动性不为0
                 我们根据用户指定的“Eth”数量计算可以添加多少“CD”令牌 */}
-            {utils.parseEther(reservedCD.toString()).eq(zero) ? (
-              <div>
+              {utils.parseEther(reservedCD.toString()).eq(zero) ? (
+                <div>
+                  <input
+                    type="number"
+                    placeholder="Amount of Ether"
+                    onChange={(e) => setAddEther(e.target.value || "0")}
+                    className={styles.input}
+                    min="0"
+                  />
+                  {/* todo 这里为什么setAddEther没有转为ether而setAddCDTokens就要转为ether还转为BigNumber */}
+                  <input
+                    type="number"
+                    placeholder="Amount of CryptoDev tokens"
+                    onChange={(e) =>
+                      setAddCDTokens(
+                        BigNumber.from(utils.parseEther(e.target.value))
+                      )
+                    }
+                    className={styles.input}
+                  />
+                  <button className={styles.button1} onClick={_addLiquidity}>
+                    Add
+                  </button>
+                </div>
+              ) : (
+                <div className={styles.wrapperOne}>
+                  <input
+                    type="number"
+                    min="0"
+                    placeholder="Amount of Ether"
+                    onChange={async (e) => {
+                      setAddEther(e.target.value || "0");
+                      // 计算可以添加的CD Token的数量
+                      const _addCDTokens = await calculateCD(
+                        e.target.value || "0",
+                        etherBalanceContract,
+                        reservedCD
+                      );
+                      setAddCDTokens(_addCDTokens);
+                    }}
+                    className={styles.input}
+                  ></input>
+                  <div className={styles.inputDiv}>
+                    {`You will need ${utils
+                      .formatEther(addCDTokens)
+                      .slice(0, 5)} Crypto Dev Tokens`}
+                  </div>
+                  <button className={styles.button1} onClick={_addLiquidity}>
+                    Add
+                  </button>
+                </div>
+              )}
+
+              <div className={styles.wrapperTwo}>
                 <input
                   type="number"
-                  placeholder="Amount of Ether"
-                  onChange={(e) => setAddEther(e.target.value || "0")}
-                  className={styles.input}
-                />
-                {/* todo 这里为什么setAddEther没有转为ether而setAddCDTokens就要转为ether还转为BigNumber */}
-                <input
-                  type="number"
-                  placeholder="Amount of CryptoDev tokens"
-                  onChange={(e) =>
-                    setAddCDTokens(
-                      BigNumber.from(utils.parseEther(e.target.value))
-                    )
-                  }
-                  className={styles.input}
-                />
-                <button className={styles.button1} onClick={_addLiquidity}>
-                  Add
-                </button>
-              </div>
-            ) : (
-              <div className={styles.wrapperOne}>
-                <input
-                  type="number"
-                  placeholder="Amount of Ether"
+                  min="0"
+                  placeholder="Amount of LP Tokens"
                   onChange={async (e) => {
-                    setAddEther(e.target.value || "0");
-                    // 计算可以添加的CD Token的数量
-                    const _addCDTokens = await calculateCD(
-                      e.target.value || "0",
-                      etherBalanceContract,
-                      reservedCD
+                    setRemoveLPTokens(e.target.value || "0");
+                    // 计算在移除LPToken之后要返回给用户多少eth和CD token
+                    await _getTokensAfterRemremoveCDneeove(
+                      e.target.value || "0"
                     );
-                    setAddCDTokens(_addCDTokens);
                   }}
                   className={styles.input}
                 ></input>
                 <div className={styles.inputDiv}>
-                  {`You will need ${utils.formatEther(
-                    addCDTokens
-                  )} Crypto Dev Tokens`}
+                  {`You will get ${utils
+                    .formatEther(removeCD)
+                    .slice(0, 5)} Crypto Dev Tokens and ${utils
+                    .formatEther(removeEther)
+                    .slice(0, 5)} Eth`}
                 </div>
-                <button className={styles.button1} onClick={_addLiquidity}>
-                  Add
+                <button className={styles.button1} onClick={_removeLiquidity}>
+                  Remove
                 </button>
               </div>
-            )}
-
-            <div className={styles.wrapperTwo}>
-              <input
-                type="number"
-                placeholder="Amount of LP Tokens"
-                onChange={async (e) => {
-                  async (e) => {
-                    setRemoveLPTokens(e.target.value || "0");
-                    // 计算在移除LPToken之后要返回给用户多少eth和CD token
-                    await _getTokensAfterRemove(e.target.value || "0");
-                  };
-                }}
-                className={styles.input}
-              ></input>
-              <div className={styles.inputDiv}>
-                {`You will get ${utils.formatEther(
-                  removeCD
-                )} Crypto Dev Tokens and ${utils.formatEther(removeEther)} Eth`}
-              </div>
-              <button className={styles.button1} onClick={_removeLiquidity}>
-                Remove
-              </button>
             </div>
           </div>
         </div>
       );
-    } else {
+    } else if (walletConnected || !liquidityTab) {
       return (
         <div>
           <input
             type="number"
+            min="0"
             placeholder="Amount"
             onChange={async (e) => {
               setSwapAmount(e.target.value || "");
@@ -507,12 +494,12 @@ export default function Home() {
           <br />
           <div className={styles.inputDiv}>
             {ethSelected
-              ? `You will get ${utils.formatEther(
-                  tokenToBeReceivedAfterSwap
-                )} Crypto Dev Tokens`
-              : `You will get ${utils.formatEther(
-                  tokenToBeReceivedAfterSwap
-                )} Eth`}
+              ? `You will get ${utils
+                  .formatEther(tokenToBeReceivedAfterSwap)
+                  .slice(0, 5)} Crypto Dev Tokens`
+              : `You will get ${utils
+                  .formatEther(tokenToBeReceivedAfterSwap)
+                  .slice(0, 5)} Eth`}
           </div>
           <button className={styles.button1} onClick={_swapTokens}>
             SWAP
@@ -523,88 +510,86 @@ export default function Home() {
   };
 
   return (
-    <div style={{ background: "#000" }}>
-      <Head>
-        <title>Crypto Devs</title>
-        <meta name="description" content="Whitelist-Dapp" />
-        <link rel="icon" href="/favicon.ico" />
-        {/* <audio autoplay="autoplay" controls="controls">
+    <WagmiConfig client={wagmiClient}>
+      <div>
+        <Head>
+          <title>Crypto Devs</title>
+          <meta name="description" content="Whitelist-Dapp" />
+          <link rel="icon" href="/favicon.ico" />
+          {/* <audio autoplay="autoplay" controls="controls">
           <source
             src="https://music.163.com/#/discover/toplist?id=7356827205"
             type="audio/mpeg"
           />
           
         </audio> */}
-      </Head>
+        </Head>
 
-      {/* <canvas className={styles.webgl} id="webgl" /> */}
+        {/* <canvas className={styles.webgl} id="webgl" /> */}
+        <Header></Header>
 
-      <Canvas className={styles.assetsPurple}>
-        <OrbitControls enableZoom={false}></OrbitControls>
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[-2, 5, 2]} intensity={1} />
-        <Suspense fallback={null}>
-          <AnimatedSphere></AnimatedSphere>
-        </Suspense>
-      </Canvas>
-      <Canvas className={styles.assetsPurpleSmall}>
-        <OrbitControls enableZoom={false}></OrbitControls>
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[-2, 5, 2]} intensity={1} />
-        <Suspense fallback={null}>
-          <AnimatedSphereSmall></AnimatedSphereSmall>
-        </Suspense>
-      </Canvas>
-      <Canvas className={styles.assetsPurpleBig}>
-        <OrbitControls enableZoom={false}></OrbitControls>
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[-2, 5, 2]} intensity={1} />
-        <Suspense fallback={null}>
-          <AnimatedSphereBig></AnimatedSphereBig>
-        </Suspense>
-      </Canvas>
-
-      {/* <Ethcoin /> */}
-
-      <div className={styles.typeIt}>
-        <TypeIt className={styles.title}>
-          Welcome to Crypto Devs Exchange!
-        </TypeIt>
-      </div>
-
-      <div className={styles.pageTwo}>
-        <div
-          className={styles.main}
-          data-aos="fade-up"
-          data-aos-delay="400"
-          data-aos-easing="ease"
+        <Canvas
+          style={{ position: "absolute", background: "#000" }}
+          gl={{
+            antialias: true,
+            toneMapping: THREE.ACESFilmicToneMapping,
+            outputEncoding: THREE.sRGBEncoding,
+          }}
+          camera={{
+            fov: 45,
+            near: 0.1,
+            far: 200,
+            position: [2, 3, 3],
+          }}
         >
-          <div>
-            {/* <h1 className={styles.title}>Welcome to Crypto Devs Exchange!</h1> */}
-            <div className={styles.description}>
-              Exchange Ethereum &#60;&#62; Crypto Dev Tokens
-            </div>
-            <div>
-              <button
-                className={styles.button}
-                onClick={() => {
-                  setLiquidityTab(true);
-                }}
-              >
-                Liquidity
-              </button>
-              <button
-                className={styles.button}
-                onClick={() => {
-                  setLiquidityTab(false);
-                }}
-              >
-                Swap
-              </button>
-            </div>
-          </div>
+          <OrbitControls enableZoom={false}></OrbitControls>
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[-2, 5, 2]} intensity={1} />
+          <Suspense fallback={null}>
+            <EarthSphere />
+          </Suspense>
+        </Canvas>
 
-          {/* <Canvas className="canvas">
+        <div className={styles.typeIt}>
+          <TypeIt className={styles.title}>
+            Welcome to Crypto Devs Exchange!
+          </TypeIt>
+        </div>
+
+        <div className={styles.pageTwo}>
+          <div
+            className={styles.main}
+            // data-aos="fade-up"
+            // data-aos-delay="400"
+            // data-aos-easing="ease"
+          >
+            <div>
+              {/* <h1 className={styles.title}>Welcome to Crypto Devs Exchange!</h1> */}
+              <div className={styles.description}>
+                Exchange Ethereum &#60;&#62; Crypto Dev Tokens
+              </div>
+              <div>
+                <button
+                  className={styles.button}
+                  onClick={() => {
+                    console.log(" setLiquidityTab");
+                    setLiquidityTab(true);
+                  }}
+                >
+                  Liquidity
+                </button>
+                <button
+                  className={styles.button}
+                  onClick={() => {
+                    setLiquidityTab(false);
+                  }}
+                >
+                  Swap
+                </button>
+              </div>
+            </div>
+
+            {/* <Canvas className="canvas">
             <OrbitControls enableZoom={false}></OrbitControls>
             <ambientLight intensity={0.5} />
             <directionalLight position={[-2, 5, 2]} intensity={1} />
@@ -612,10 +597,11 @@ export default function Home() {
               <Ethcoin />
             </Suspense>
           </Canvas> */}
-          {renderButton()}
+            {renderButton()}
+          </div>
+          <div className={styles.footer}> Made with &#10084; by Naomi</div>
         </div>
-        <div className={styles.footer}> Made with &#10084; by Naomi</div>
       </div>
-    </div>
+    </WagmiConfig>
   );
 }

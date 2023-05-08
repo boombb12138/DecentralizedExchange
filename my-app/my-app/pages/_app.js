@@ -1,7 +1,21 @@
 import "../styles/globals.css";
-
+// import { ThemeProvider } from "@mui/material/styles";
+import { store } from "../store/store";
+import { Provider } from "react-redux";
+import { wagmiClient } from "../components/ConnectWallet";
+import { WagmiConfig, useAccount } from "wagmi";
+// import getTheme from "../theme/index.js";
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  return (
+    <Provider store={store}>
+      {/* <WagmiConfig client={wagmiClient}> */}
+      {/* <ThemeProvider theme={getTheme("light")}> */}
+      <Component {...pageProps} />
+
+      {/* </ThemeProvider> */}
+      {/* </WagmiConfig> */}
+    </Provider>
+  );
 }
 
 export default MyApp;

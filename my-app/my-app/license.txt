@@ -1,0 +1,11 @@
+Model Information:
+* title:	Ethereum Coin
+* source:	https://sketchfab.com/3d-models/ethereum-coin-a8ece89bbf6a4cdd892c92efc8021dd8
+* author:	zzyeo (https://sketchfab.com/zzyeo)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Ethereum Coin" (https://sketchfab.com/3d-models/ethereum-coin-a8ece89bbf6a4cdd892c92efc8021dd8) by zzyeo (https://sketchfab.com/zzyeo) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

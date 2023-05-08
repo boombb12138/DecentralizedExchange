@@ -23,15 +23,18 @@
   z-index: -1;
   position: absolute;
 
+
 }
 
 .pageTwo {
   background-color: black;
-  height: 800px;
+  width: 100%;
+
 }
 
 .footer {
-  position: fixed;
+  position: relative;
+  margin-top: 10px;
   bottom: 0%;
   left: 50%;
   transform: translateX(-50%);
@@ -58,9 +61,7 @@
 }
 
 .typeIt {
-  width: 100vh;
   height: 100vh;
-  padding-top: 100vh;
 }
 
 .title {
@@ -83,14 +84,14 @@
   font-size: 2rem;
   line-height: 2rem;
   font-weight: 700;
-  margin-top: -10px;
+
 }
 
 .wrapper {
-  position: absolute;
+  /* position: absolute;
   left: 50%;
   bottom: -45%;
-  transform: translateX(-50%);
+  transform: translateX(-50%); */
 
   display: flex;
   flex-direction: column;
@@ -98,6 +99,8 @@
   background-color: #1a1a1a;
   border-radius: 5%;
   padding: 10px;
+  width: 50%;
+  transform: translateX(50%);
 }
 
 .wrapperOne {
@@ -137,10 +140,10 @@
 }
 
 .assets {
-  position: absolute;
+  /* position: absolute;
   bottom: 30%;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 50%; */
+  /* transform: translateX(-50%); */
   line-height: 30px;
 }
 
@@ -172,10 +175,10 @@
   font-size: 15px;
   font-weight: 600;
   padding: 10px;
-  width: 100px;
+  width: 130px;
   cursor: pointer;
   margin: 2%;
-
+  white-space: nowrap;
 }
 
 .button1 {
