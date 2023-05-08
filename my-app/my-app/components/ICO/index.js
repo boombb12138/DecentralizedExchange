@@ -337,6 +337,7 @@ export default function Home() {
           style={{
             opacity: 0.3,
             position: "absolute",
+            "pointer-events": "none",
             right: 0,
           }}
         >
